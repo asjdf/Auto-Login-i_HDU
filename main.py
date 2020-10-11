@@ -29,6 +29,7 @@ class i_HDU(object):
                 return self.login(tryTime+1)
             elif tryTime > self.tryTimeMax:
                 print("超过最大重试次数， 不再尝试")
+                return 1
             pass
 
 
@@ -47,6 +48,7 @@ class i_HDU(object):
                 return self.logout(tryTime+1)
             elif tryTime > self.tryTimeMax:
                 print("超过最大重试次数， 不再尝试")
+                return 1
             pass
 
 
