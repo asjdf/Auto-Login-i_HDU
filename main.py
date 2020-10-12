@@ -1,8 +1,11 @@
 import requests
+import os
+from dotenv import load_dotenv
 
-userName = 20333322
+load_dotenv(verbose=True, override=True, encoding='utf-8')
+userName = os.getenv('userName')
 # 学号
-pwd = 22222222
+pwd = os.getenv('pwd')
 # 登录密码
 
 class i_HDU(object):
@@ -11,8 +14,8 @@ class i_HDU(object):
         self.pwd = _pwd
         self.tryTimeMax = _tryTimeMax
     # 登录
-    def login(self):
-        tryTime = 1
+    def login(self,tryTime):
+        print('正在登录')
         try:
             data = {'opr' : 'pwdLogin',
                     'userName' : self.userName,
@@ -25,17 +28,18 @@ class i_HDU(object):
             pass
         except:
             print('第'+ str(tryTime) +'登录失败，请检查网络连接')
-            if tryTime <= self.tryTimeMax:
+            if tryTime < self.tryTimeMax:
+                print('即将开始重试\n')
                 return self.login(tryTime+1)
-            elif tryTime > self.tryTimeMax:
+            elif tryTime >= self.tryTimeMax:
                 print("超过最大重试次数， 不再尝试")
                 return 1
             pass
 
 
     # 登出
-    def logout(self):
-        tryTime = 1
+    def logout(self,tryTime):
+        print('正在登出')
         try:
             data = {'opr' : 'logout'}
             r = requests.post('http://2.2.2.2/ac_portal/login.php',data)
@@ -44,14 +48,20 @@ class i_HDU(object):
             pass
         except:
             print('第'+ str(tryTime) +'登出失败，请检查网络连接')
-            if tryTime <= self.tryTimeMax:
+            if tryTime < self.tryTimeMax:
+                print('即将开始重试\n')
                 return self.logout(tryTime+1)
-            elif tryTime > self.tryTimeMax:
+            elif tryTime >= self.tryTimeMax:
                 print("超过最大重试次数， 不再尝试")
                 return 1
             pass
 
+def main():
+    print('欢迎使用i_HDU登录助手 By asjdf')
+    i = i_HDU(userName, pwd)
+    i.login(1)
+    print('程序结束,再见')
+    return 0
 
 if __name__ == '__main__':
-    i = i_HDU(userName, pwd)
-    i.login()
+    main()
