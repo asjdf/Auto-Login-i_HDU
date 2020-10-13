@@ -3,10 +3,6 @@ import os
 from dotenv import load_dotenv
 
 load_dotenv(verbose=True, override=True, encoding='utf-8')
-userName = os.getenv('userName')
-# 学号
-pwd = os.getenv('pwd')
-# 登录密码
 
 class i_HDU(object):
     def __init__(self,_userName,_pwd,_tryTimeMax = 5):
@@ -36,7 +32,6 @@ class i_HDU(object):
                 return 1
             pass
 
-
     # 登出
     def logout(self,tryTime):
         print('正在登出')
@@ -58,6 +53,12 @@ class i_HDU(object):
 
 def main():
     print('欢迎使用i_HDU登录助手 By asjdf')
+    # 学号
+    userName = os.getenv('userName')
+    print(userName)
+    # 登录密码
+    pwd = os.getenv('pwd')
+    print(pwd)
     i = i_HDU(userName, pwd)
     i.login(1)
     print('程序结束,再见')
