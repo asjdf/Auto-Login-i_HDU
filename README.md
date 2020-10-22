@@ -4,7 +4,11 @@
 
 
 
-## main.py 
+## main.exe
+
+main.py的编译版本 只有登录功能
+
+## main.py
 
 包含登录和登出
 
