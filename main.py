@@ -18,7 +18,7 @@ class i_HDU(object):
                     'pwd' : self.pwd,
                     'rememberPwd' : '0'
                     }
-            r = requests.post('http://2.2.2.2/ac_portal/login.php',data)
+            r = requests.post('http://2.2.2.2/ac_portal/login.php',data,proxies='')
             print(r.content)
             return 0
             pass
@@ -37,7 +37,7 @@ class i_HDU(object):
         print('正在登出')
         try:
             data = {'opr' : 'logout'}
-            r = requests.post('http://2.2.2.2/ac_portal/login.php',data)
+            r = requests.post('http://2.2.2.2/ac_portal/login.php',data,proxies='')
             print(r.content.decode('utf-8'))
             return 0
             pass
